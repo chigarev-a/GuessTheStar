@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Guess the star</string>
+    <string name="button_text">Button</string>
+    <string name="photo_star">Фотография знаменитости</string>
+</resources>
