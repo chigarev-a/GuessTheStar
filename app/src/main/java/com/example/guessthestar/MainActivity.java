@@ -7,8 +7,10 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -70,6 +72,14 @@ public class MainActivity extends AppCompatActivity {
             Bitmap bitmap = task.execute(urlsImg.get(numberOfQuestion)).get();
             if(bitmap != null){
                 imageViewStar.setImageBitmap(bitmap);
+                for (int i = 0; i < buttons.size(); i++){
+                    if(i == numberOfRightAnswer){
+                        buttons.get(i).setText(names.get(numberOfQuestion));
+                    }else{
+                        int wrongAnswer = generateWrongAnswer();
+                        buttons.get(i).setText(names.get(wrongAnswer));
+                    }
+                }
             }
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
@@ -81,6 +91,11 @@ public class MainActivity extends AppCompatActivity {
         numberOfRightAnswer = (int) (Math.random() * buttons.size());
 
     }
+
+    private int generateWrongAnswer() {
+        return (int) (Math.random() * names.size());
+    }
+
 //    Получение массивов имен и изображений
     private void getContent(){
         DownloadContentTask task = new DownloadContentTask();
@@ -112,7 +127,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//    Загрузка контента страницы
+    public void onClickAnswer(View view) {
+
+        Button button = (Button) view;
+        String tag = button.getTag().toString();
+        if(Integer.parseInt(tag) == numberOfRightAnswer){
+            Toast.makeText(this, "Верно!", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Неверно, правильный ответ: " + names.get(numberOfQuestion), Toast.LENGTH_SHORT).show();
+        }
+        playGame();
+    }
+
+    //    Загрузка контента страницы
     private static class DownloadContentTask extends AsyncTask<String, Void, String>{
         @Override
         protected String doInBackground(String... strings) {

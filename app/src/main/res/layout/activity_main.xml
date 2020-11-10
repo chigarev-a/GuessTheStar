@@ -8,6 +8,7 @@
 
     <Button
         android:id="@+id/button0"
+        android:onClick="onClickAnswer"
         android:tag="0"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -18,6 +19,7 @@
 
     <Button
         android:id="@+id/button1"
+        android:onClick="onClickAnswer"
         android:tag="1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -29,6 +31,7 @@
 
     <Button
         android:id="@+id/button2"
+        android:onClick="onClickAnswer"
         android:tag="2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -40,6 +43,7 @@
 
     <Button
         android:id="@+id/button3"
+        android:onClick="onClickAnswer"
         android:tag="3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
